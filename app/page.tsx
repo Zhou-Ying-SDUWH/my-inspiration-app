@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useRunStore } from '@/store/useRunStore';
 import { RunCard } from '@/components/RunCard';
 import { RunFormModal } from '@/components/RunFormModal';
+import { AIPlanComponent } from '@/components/AIPlanComponent';
 import { Run } from '@/types/run';
 import { Plus } from 'lucide-react';
 import { SignIn, useUser } from '@insforge/react';
@@ -149,6 +150,9 @@ export default function Home() {
         </header>
 
         <main>
+          {/* AI计划组件 */}
+          <AIPlanComponent userId={user.id} />
+          
           {isLoading && runs.length === 0 ? (
             <div className="flex justify-center items-center h-64">
               <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
