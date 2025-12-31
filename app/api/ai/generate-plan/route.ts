@@ -1,9 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { GoogleGenerativeAI } from '@google/generative-ai';
+import OpenAI from 'openai';
 import { insforge } from '@/config/insforge';
 
-// 获取Gemini API密钥
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '');
+// 初始化DeepSeek客户端
+const deepseek = new OpenAI({
+  apiKey: process.env.DEEPSEEK_API_KEY || '',
+  baseURL: 'https://api.deepseek.com'
+});
 
 export async function POST(request: NextRequest) {
   try {
@@ -92,11 +95,23 @@ ${runHistory.slice(0, 5).map((run, index) =>
 }
 `;
 
-    // 调用Gemini API生成计划
-    const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
-    const result = await model.generateContent(prompt);
-    const response = await result.response;
-    const text = response.text();
+    // 调用DeepSeek API生成计划
+    const completion = await deepseek.chat.completions.create({
+      model: 'deepseek-chat',
+      messages: [
+        {
+          role: 'system',
+          content: '你是一名专业的跑步教练，擅长根据用户的跑步历史数据制定个性化的训练计划。请始终以JSON格式返回训练计划。'
+        },
+        {
+          role: 'user',
+          content: prompt
+        }
+      ],
+      temperature: 0.7,
+    });
+    
+    const text = completion.choices[0].message.content || '';
     
     // 尝试解析JSON响应
     let planData;

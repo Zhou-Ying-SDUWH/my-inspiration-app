@@ -15,7 +15,7 @@
 - **前端**: Next.js 16.1.1, React 19.2.3, TypeScript
 - **后端**: Next.js API Routes
 - **数据库**: InsForge
-- **AI服务**: Google Gemini API
+- **AI服务**: DeepSeek API
 - **样式**: Tailwind CSS
 - **状态管理**: Zustand
 - **认证**: InsForge Auth
@@ -37,8 +37,8 @@ npm install
 创建 `.env.local` 文件并添加以下内容：
 
 ```env
-# Gemini API Key (从 https://makersuite.google.com/app/apikey 获取)
-GEMINI_API_KEY=your_gemini_api_key_here
+# DeepSeek API Key (从 https://platform.deepseek.com/api_keys 获取)
+DEEPSEEK_API_KEY=your_deepseek_api_key_here
 
 # InsForge Configuration
 NEXT_PUBLIC_INSFORGE_URL=https://q7crgduz.us-west.insforge.app
@@ -111,13 +111,13 @@ my-inspiration-app/
 
 在部署时，请确保设置以下环境变量：
 
-- `GEMINI_API_KEY`: Google Gemini API密钥（必需）
+- `DEEPSEEK_API_KEY`: DeepSeek API密钥（必需）
 - `NEXT_PUBLIC_INSFORGE_URL`: InsForge服务URL（可选，有默认值）
 - `NEXT_PUBLIC_INSFORGE_ANON_KEY`: InsForge匿名密钥（可选，有默认值）
 
 ## 安全注意事项
 
-- Gemini API密钥存储在服务器端环境变量中，不会暴露给客户端
+- DeepSeek API密钥存储在服务器端环境变量中，不会暴露给客户端
 - 所有API调用都通过后端进行，确保API密钥安全
 - 用户数据通过InsForge进行隔离，确保数据安全
 
