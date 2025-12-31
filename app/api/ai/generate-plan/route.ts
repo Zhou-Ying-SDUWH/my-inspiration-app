@@ -72,7 +72,7 @@ export async function POST(request: NextRequest) {
       distance: run.distance,
       duration: run.time, // 注意：数据库中的字段名是time，不是duration
       pace: run.pace,
-      notes: run.notes || ''
+      notes: '' // 添加空字符串作为notes字段的默认值
     }));
 
     // 计算一些统计数据
